@@ -19,6 +19,9 @@ app.use(function (req, res, next) {
 mongoose.connect(`mongodb+srv://compendiumrpguseratlas:${MONGO_PASSWORD}@rpgdb.3fmit.mongodb.net/rpgDB?retryWrites=true&w=majority`, { useNewUrlParser: true, useUnifiedTopology: true })
     .then(() => console.log('DB Connected'))
 
+app.get('/', function (req, res) {
+    res.send("Compendium RPG API")
+})
 
 app.get('/api/series', function (req, res) {
     Serie.find()
