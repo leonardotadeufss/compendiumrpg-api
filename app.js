@@ -1,13 +1,11 @@
-require('dotenv').config()
 const mongoose = require('mongoose');
-const fetch = require('node-fetch');
 const express = require('express');
 const bodyParser = require('body-parser')
+const app = express();
 
 const { MONGO_PASSWORD } = process.env;
 
 
-const app = express();
 app.use(express.static('public'));
 
 app.use(function (req, res, next) {
