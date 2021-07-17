@@ -18,18 +18,15 @@ app.use(function (req, res, next) {
 mongoose.connect(`mongodb+srv://compendiumrpguseratlas:${MONGO_PASSWORD}@rpgdb.3fmit.mongodb.net/rpgDB?retryWrites=true&w=majority`, { useNewUrlParser: true, useUnifiedTopology: true })
     .then(() => console.log('DB Connected'))
 
-app.get('/', function (req, res) {
-    res.send("Compendium RPG API")
-})
 
-app.get('/api/series', function (req, res) {
+app.get('/series', function (req, res) {
     Serie.find()
         .then(function (series) {
             res.send(series);
         });
 })
 
-app.get('/api/tags/:tag', function (req, res) {
+app.get('/tags/:tag', function (req, res) {
     const Tag = req.params.tag;
     Serie.find({ tags: Tag })
         .then(function (series) {
@@ -37,7 +34,7 @@ app.get('/api/tags/:tag', function (req, res) {
         });
 })
 
-app.get('/api/tags', function (req, res) {
+app.get('/tags', function (req, res) {
     Serie.find({}, '-_id tags')
         .then(function (tags) {
             var tagCollection = [];
@@ -53,6 +50,11 @@ app.get('/api/tags', function (req, res) {
 
             res.send(tagCollection)
         })
+})
+
+
+app.get('/', function (req, res) {
+    res.send("Compendium RPG API")
 })
 
 const userSchema = new mongoose.Schema({
