@@ -4,6 +4,7 @@ const fetch = require('node-fetch');
 const express = require('express');
 const bodyParser = require('body-parser')
 
+const { MONGO_PASSWORD } = process.env;
 
 
 const app = express();
@@ -15,8 +16,8 @@ app.use(function (req, res, next) {
     next();
 });
 
-mongoose.connect("mongodb://localhost:27017/rpgDB", { useNewUrlParser: true, useUnifiedTopology: true })
-    .then(() => console.log('DB Connected to the port 27017'))
+mongoose.connect(`mongodb+srv://compendiumrpguseratlas:${MONGO_PASSWORD}@rpgdb.3fmit.mongodb.net/rpgDB?retryWrites=true&w=majority`, { useNewUrlParser: true, useUnifiedTopology: true })
+    .then(() => console.log('DB Connected'))
 
 
 app.get('/api/series', function (req, res) {
